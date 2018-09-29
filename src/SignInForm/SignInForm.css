@@ -1,0 +1,70 @@
+.SignInForm {
+    width: 450px;
+    height: 80px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #e6e6e6;
+    margin-left: auto;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.SignInForm:hover {
+    border: solid 1px #b3b3b3;
+}
+.SignInForm-enter {
+    opacity: 0.01;
+}
+.SignInForm-enter-done {
+    opacity: 1;
+    transition: all 300ms ease-out;
+}
+.SignInForm-exit {
+    opacity: 1;
+}
+.SignInForm__selector {
+    width: 60px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #8e8e8e;
+    background: #ffffff;
+    margin-left: 40px;
+    margin-top: 29px;
+    margin-bottom: 29px;
+    opacity: 0.5;
+    border: none;
+    outline: none;
+}
+.SignInForm__selector:hover {
+    cursor: pointer;
+}
+.SignInForm__input {
+    width: 124px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+}
+.SignInForm__button {
+    width: 150px;
+    height: 80px;
+    border-radius: 4px;
+    background-color: #d7d7d7;
+    margin-right: auto;
+    margin-left: 20px;
+    border: none;
+    outline: none;
+}
