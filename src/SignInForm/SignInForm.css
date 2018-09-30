@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,900');
+
 .SignInForm {
     width: 450px;
     height: 80px;
     border-radius: 4px;
-    background-color: #ffffff;
+    background: #ffffff;
     border: solid 1px #e6e6e6;
     margin-left: auto;
     -webkit-transition: all 0.5s;
@@ -62,9 +64,28 @@
     width: 150px;
     height: 80px;
     border-radius: 4px;
-    background-color: #d7d7d7;
     margin-right: auto;
     margin-left: 20px;
     border: none;
     outline: none;
+    background: #d7d7d7;
+    transition: all 1s;
+}
+.SignInForm__button:enabled {
+    background: #000000;
+    transition: all 1s;
+}
+.SignInForm__button:enabled:hover {
+    animation: SignInForm__button-enabled-hover 1s;
+    background: linear-gradient(to bottom, #00ffff 50%, #000000 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+}
+@keyframes SignInForm__button-enabled-hover {
+    from {
+        background-position: 0 100%;
+    }
+    to {
+        background-position: 100% 200%;
+    }
 }
