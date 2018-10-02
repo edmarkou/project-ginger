@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './SignInForm.css';
-import dots from './dots.png';
+import dots from './dotsGo.svg';
+import rightArrow from './arrowRight.svg';
 
 const regex = /[^0-9 ]+/g;
 
@@ -12,6 +13,7 @@ class SignInForm extends Component {
       loaded: false,
       input: '',
       buttonDisabled: true,
+      clicked: false,
     }
   }
   componentDidMount(){
@@ -43,9 +45,20 @@ class SignInForm extends Component {
       else this.setState({input: input, buttonDisabled: true});
     }
   }
-  onClick(event){
+  onClickSelector(event){
     event.preventDefault();
     console.log('clicked')
+  }
+  onClickButton(event){
+    event.preventDefault();
+    this.setState({ clicked: true });
+  }
+  dotGo(e) {
+    e.preventDefault();
+    if(!this.state.buttonDisabled) {
+      console.log(this.refs.dotGo);
+      this.refs.dotGo.beginElementAt(0);
+    }
   }
   render() {
     return (
@@ -55,14 +68,15 @@ class SignInForm extends Component {
           timeout={0}
           in={this.state.loaded}
           unmountOnExit>
-          <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', marginTop: '40px'}}>
+          <div style={!this.state.clicked ? { display: 'grid', gridTemplateColumns: 'auto auto', marginTop: '40px'} : {marginTop: '40px'}}>
             <form
-              className="SignInForm"
+              className={ this.state.clicked ? "SignInForm-validation" : "SignInForm"}
               onClick={() => { document.getElementById('input').focus() }}
             >
               <button
+                id={'selector'}
                 className="SignInForm__selector"
-                onClick={(event) => this.onClick(event)}
+                onClick={(event) => this.onClickSelector(event)}
               >
                 <a>+371 <i className="fa fa-angle-down"/></a>
               </button>
@@ -76,13 +90,13 @@ class SignInForm extends Component {
                 maxLength={10}
                 onChange={(event) => { this.onType(event) }}/>
             </form>
-            <button
+            {!this.state.clicked ? <button id={'buttonn'}
               className="SignInForm__button"
               disabled={this.state.buttonDisabled}
-              onClick={(event) => this.onClick(event) }
+              onClick={(event) => this.onClickButton(event)}
             >
-              <img src={dots} alt={'...'}/>
-            </button>
+              <img src={dots} alt={""}/>
+            </button> : null}
           </div>
         </CSSTransition>
       </div>

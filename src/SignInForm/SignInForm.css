@@ -7,8 +7,20 @@
     background: #ffffff;
     border: solid 1px #e6e6e6;
     margin-left: auto;
+    margin-right: 0;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+}
+.SignInForm-validation {
+    width: 550px;
+    height: 100px;
+    background: #ffffff;
+    border: solid 1px #e6e6e6;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    box-shadow: 0 4px 8px 0 #e6e6e6, 0 6px 20px 0 #e6e6e6;
 }
 .SignInForm:hover {
     border: solid 1px #b3b3b3;
@@ -68,24 +80,21 @@
     margin-left: 20px;
     border: none;
     outline: none;
-    background: #d7d7d7;
-    transition: all 1s;
+    background: #5e5e5e;
+    opacity: 0.3;
+    background-size: 100% 200%;
 }
 .SignInForm__button:enabled {
-    background: #000000;
-    transition: all 1s;
+    background: linear-gradient(to bottom, #000000 50%, #00ffff 50%);
+    background-size: 100% 200%;
+    transition: all 0.2s;
+    opacity: 1;
+}
+.SignInForm__button:enabled::before {
+    opacity: 1;
 }
 .SignInForm__button:enabled:hover {
-    animation: SignInForm__button-enabled-hover 1s;
-    background: linear-gradient(to bottom, #00ffff 50%, #000000 50%);
+    background: linear-gradient(to bottom, #000000 50%, #00ffff 50%) 100% 100%;
     background-size: 100% 200%;
-    transition: all 1s;
-}
-@keyframes SignInForm__button-enabled-hover {
-    from {
-        background-position: 0 100%;
-    }
-    to {
-        background-position: 100% 200%;
-    }
+    transition: all 0.2s;
 }

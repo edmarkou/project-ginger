@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="5" viewBox="0 0 35 5">
+    <g fill="#000" fill-rule="evenodd">
+        <circle cx="130" cy="2.5" r="2.5">
+            <animate attributeType="CSS" attributeName="cx"
+                     from="130" to="2.5"
+                     dur="0.5s" repeatCount="1" begin="indefinite"
+                     fill="freeze" />
+        </circle>
+        <circle cx="130" cy="2.5" r="2.5">
+            <animate attributeType="CSS" attributeName="cx"
+                     from="130" to="17.5"
+                     dur="0.4s" repeatCount="1" begin="indefinite 0.3s"
+                     fill="freeze"/>
+        </circle>
+        <circle cx="130" cy="2.5" r="2.5">
+            <animate attributeType="CSS" attributeName="cx"
+                     from="130" to="32.5"
+                     dur="0.4s" repeatCount="1" begin="indefinite 0.4s"
+                     fill="freeze"/>
+        </circle>
+    </g>
+</svg>
