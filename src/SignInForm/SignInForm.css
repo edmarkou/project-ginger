@@ -146,3 +146,10 @@
 .SignInForm__button:enabled:active {
     background: linear-gradient(to bottom, #00dce8 50%, #00dce8 50%);
 }
+.SignInForm__button-svg{
+    transition: all 0.2s;
+}
+.SignInForm__button-svg:active {
+    margin-left: 100px;
+    transition: all 0.2s;
+}

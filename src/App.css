@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,900');
 
-.App-policy-div {
+.App__policy-div {
   text-align: center;
   margin-bottom: 95px;
   margin-top: 11%;
@@ -26,6 +26,7 @@
   margin-bottom: 95px;
   margin-top: 11%;
   color: #8e8e8e;
+  stroke: #8e8e8e;
   cursor: pointer;
 }
 .App__policy-enter {
@@ -42,4 +43,5 @@
 }
 .App__policy:active {
   color: #00dce8;
+  stroke: #00dce8;
 }

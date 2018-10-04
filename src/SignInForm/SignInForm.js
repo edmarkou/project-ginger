@@ -108,23 +108,26 @@ class SignInForm extends Component {
               onMouseOver={(event) => this.onHoveredButton(event)}
               onMouseLeave={(event) => this.onLeaveButton(event)}
             >
-              <svg  xmlns="http://www.w3.org/2000/svg" width="150" height="22" viewBox="0 0 35 22">
+              <svg className={!this.state.buttonDisabled ? "SignInForm__button-svg" : null}
+                   xmlns="http://www.w3.org/2000/svg"
+                   width="150" height="90" viewBox="0 0 35 90"
+              >
                 <g fill="#fff" fillRule="evenodd">
                   <g fill="none" fillRule="evenodd" stroke="#fff" strokeWidth="2">
-                    <path d="M-90 11h28.5M-71.5 1.5L-61 11l-9.5 9.5">
+                    <path d="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5">
                       <animate attributeType="CSS" attributeName="d" id={"enabledArrow"}
-                               values="M-90 11h28.5M-71.5 1.5L-61 11l-9.5 9.5;
-                               M50 11h28.5M69.5 1.5L79 11l-9.5 9.5;
-                               M-15 11h28.5M4.5 1.5L14 11l-9.5 9.5;
-                               M10 11h28.5M29.5 1.5L39 11l-9.5 9.5;
-                               M-5 11h28.5M14.5 1.5L24 11l-9.5 9.5;
-                               M0 11h28.5M19.5 1.5L29 11l-9.5 9.5"
+                               values="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5;
+                               M50 45h28.5M69.5 35.5L79 45l-9.5 9.5;
+                               M-15 45h28.5M4.5 35.5L14 45l-9.5 9.5;
+                               M10 45h28.5M29.5 35.5L39 45l-9.5 9.5;
+                               M-5 45h28.5M14.5 35.5L24 45l-9.5 9.5;
+                               M0 45h28.5M19.5 35.5L29 45l-9.5 9.5"
                                keyTimes="0; 0.2; 0.5; 0.75; 0.85; 1"
                                dur="0.6s" repeatCount="1" begin="indefinite"
                                fill="freeze"
                       />
                       <animate attributeType="CSS" attributeName="d" id={"hoveredArrow"}
-                               from="M0 11h28.5M19.5 1.5L29 11l-9.5 9.5" to="M10 11h28.5M29.5 1.5L39 11l-9.5 9.5"
+                               from="M0 45h28.5M19.5 35.5L29 45l-9.5 9.5" to="M10 45h28.5M29.5 35.5L39 45l-9.5 9.5"
                                dur="0.2s" repeatCount="1" begin="indefinite"
                                fill="freeze"
                       />
@@ -134,21 +137,21 @@ class SignInForm extends Component {
                                fill="freeze"
                       />
                       <animate attributeType="CSS" attributeName="d" id={"leaveArrow"}
-                               values="M10 11h28.5M29.5 1.5L39 11l-9.5 9.5;
-                               M-5 11h28.5M14.5 1.5L24 11l-9.5 9.5;
-                               M5 11h28.5M24.5 1.5L34 11l-9.5 9.5;
-                               M0 11h28.5M19.5 1.5L29 11l-9.5 9.5"
+                               values="M10 45h28.5M29.5 35.5L39 45l-9.5 9.5;
+                               M-5 45h28.5M14.5 35.5L24 45l-9.5 9.5;
+                               M5 45h28.5M24.5 35.5L34 45l-9.5 9.5;
+                               M0 45h28.5M19.5 35.5L29 45l-9.5 9.5"
                                dur="0.4s" repeatCount="1" begin="indefinite"
                                fill="freeze"
                       />
                       <animate attributeType="CSS" attributeName="d" id={"backArrow"}
-                               from="M0 11h28.5M19.5 1.5L29 11l-9.5 9.5" to="M-90 11h28.5M-71.5 1.5L-61 11l-9.5 9.5"
+                               from="M0 45h28.5M19.5 35.5L29 45l-9.5 9.5" to="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5"
                                dur="0.2s" repeatCount="1" begin="indefinite"
                                fill="freeze"
                       />
                     </path>
                   </g>
-                  <circle cx="2.5" cy="11" r="2.5">
+                  <circle cx="2.5" cy="45" r="2.5">
                     <animate
                             attributeType="CSS" attributeName="cx" id={"dotGo1"}
                             values="2.5; 17.5; 130" keyTimes="0; 0.3; 1"
@@ -161,7 +164,7 @@ class SignInForm extends Component {
                             repeatCount="1" begin="indefinite"
                             fill="freeze" />
                   </circle>
-                  <circle cx="17.5" cy="11" r="2.5">
+                  <circle cx="17.5" cy="45" r="2.5">
                     <animate attributeType="CSS" attributeName="cx" id={"dotGo2"}
                              values="17.5; 50; 130" keyTimes="0; 0.5; 1"
                              dur="0.4s" repeatCount="1" begin="indefinite"
@@ -171,7 +174,7 @@ class SignInForm extends Component {
                              dur="0.2s" repeatCount="1" begin="indefinite"
                              fill="freeze"/>
                   </circle>
-                  <circle cx="32.5" cy="11" r="2.5">
+                  <circle cx="32.5" cy="45" r="2.5">
                     <animate attributeType="CSS" attributeName="cx" id={"dotGo3"}
                              values="32.5; 75; 130" keyTimes="0; 0.6; 1"
                              dur="0.4s" repeatCount="1" begin="indefinite"
