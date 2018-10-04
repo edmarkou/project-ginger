@@ -26,6 +26,7 @@
     letter-spacing: 0.4px;
     text-align: center;
     color: #000000;
+    cursor: default;
 }
 .SignInForm__instructions {
     width: 470px;
@@ -40,6 +41,7 @@
     text-align: center;
     color: #8e8e8e;
     opacity: 0.5;
+    cursor: default;
 }
 .SignInForm-validation {
     width: 550px;
@@ -117,6 +119,7 @@
 .SignInForm__button {
     width: 150px;
     height: 90px;
+    padding: 0;
     margin-right: auto;
     margin-left: 12px;
     border: none;
@@ -138,4 +141,8 @@
     background: linear-gradient(to bottom, #000000 50%, #00f1ff 50%) 0 100%;
     background-size: 100% 200%;
     transition: all 0.2s;
+    cursor: pointer;
+}
+.SignInForm__button:enabled:active {
+    background: linear-gradient(to bottom, #00dce8 50%, #00dce8 50%);
 }

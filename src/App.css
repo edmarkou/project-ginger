@@ -10,6 +10,7 @@
   height: 12px;
   object-fit: contain;
   margin-right: 5px;
+  cursor: pointer;
 }
 .App__policy {
   width: 131px;
@@ -25,6 +26,7 @@
   margin-bottom: 95px;
   margin-top: 11%;
   color: #8e8e8e;
+  cursor: pointer;
 }
 .App__policy-enter {
   opacity: 0.01;
@@ -35,6 +37,9 @@
   transition: all 1s;
 }
 .App__policy:hover {
-  cursor: pointer;
   color: #00f1ff;
+  stroke: #00f1ff;
+}
+.App__policy:active {
+  color: #00dce8;
 }
