@@ -3,8 +3,6 @@ import { CSSTransition } from 'react-transition-group';
 import InputMask from 'react-text-mask';
 import './SignInForm.css';
 
-const regex = /[^0-9 ]+/g;
-
 class SignInForm extends Component {
   constructor(props) {
     super(props);
@@ -16,86 +14,82 @@ class SignInForm extends Component {
       clicked: false,
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setState({ loaded: true })
   }
-  onType(event){
-    console.log(event.target.value);
+  onType(event) {
     if (event.target.value.length === 10) {
-      if(this.state.input.length < 10) {
+      if (this.state.input.length < 10) {
         document.getElementById("dotGo1").beginElementAt(0.2);
         document.getElementById("dotGo2").beginElementAt(0.1);
         document.getElementById("dotGo3").beginElementAt(0);
         document.getElementById("enabledArrow").beginElementAt(0.2);
       }
-      this.setState({input: event.target.value, buttonDisabled: false});
+      this.setState({ input: event.target.value, buttonDisabled: false });
     }
     else {
-        if(!this.state.buttonDisabled){
+        if (!this.state.buttonDisabled) {
           document.getElementById("dotBack1").beginElementAt(0);
           document.getElementById("dotBack2").beginElementAt(0.1);
           document.getElementById("dotBack3").beginElementAt(0.2);
           document.getElementById("backArrow").beginElementAt(0);
         }
-        this.setState({input: event.target.value, buttonDisabled: true});
+        this.setState({ input: event.target.value, buttonDisabled: true });
     }
   }
-  onClickSelector(event){
+  onClickSelector(event) {
     event.preventDefault();
   }
-  onClickButton(event){
+  onClickButton(event) {
     event.preventDefault();
     document.getElementById("goArrow").beginElementAt(0);
     this.setState({ clicked: true });
   }
   onHoveredButton(event) {
-    if(!this.state.buttonHovered && !this.state.buttonDisabled) {
+    if (!this.state.buttonHovered && !this.state.buttonDisabled) {
       document.getElementById("hoveredArrow").beginElementAt(0);
     }
-    this.setState({buttonHovered: true});
+    this.setState({ buttonHovered: true });
   }
   onLeaveButton(event) {
-    if(this.state.buttonHovered && !this.state.buttonDisabled) {
+    if (this.state.buttonHovered && !this.state.buttonDisabled) {
       document.getElementById("leaveArrow").beginElementAt(0.3);
     }
-    this.setState({buttonHovered: false})
+    this.setState({ buttonHovered: false })
   }
   render() {
     return (
       <div className={"SignInForm"}>
-        <CSSTransition classNames={"SignInForm__SignInText"} timeout={300} in={this.state.loaded} unmountOnExit>
-          <div style={{textAlign: 'center', marginTop: '10%', marginBottom: '60px'}}>
-            <a className="SignInForm__SignInText" >Sign In / Sign Up</a>
+        <CSSTransition classNames={"SignInForm__SignInText"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
+          <div style={{ textAlign: 'center', marginTop: '10%', marginBottom: '60px' }}>
+            <a className={"SignInForm__SignInText"} >Sign In / Sign Up</a>
           </div>
         </CSSTransition>
-        <CSSTransition
-          classNames={"SignInForm__form"}
-          timeout={0}
-          in={this.state.loaded}
-          unmountOnExit>
-          <div style={!this.state.clicked ? { display: 'grid', gridTemplateColumns: 'auto auto'} : null}>
+        <CSSTransition classNames={"SignInForm__form"} timeout={ 0 } in={ this.state.loaded } unmountOnExit>
+          <div style={ this.state.clicked ? {display: 'none'} : { width: '614px', margin: 'auto' }}>
             <form
-              className={ this.state.clicked ? "SignInForm-validation" : "SignInForm__form"}
-              onClick={() => { document.getElementById('input').focus() }}
+              className={"SignInForm__form"}
+              onClick={ () => { document.getElementById('input').focus() }}
             >
               <button
-                id={'selector'}
-                className="SignInForm__selector"
+                id={"selector"}
+                className={"SignInForm__selector"}
                 onClick={(event) => this.onClickSelector(event)}
               >
-                <a>+371 <i className="fa fa-angle-down"/></a>
+                <a>+371 <i className="fa fa-angle-down"/> </a>
               </button>
               <InputMask id={'input'}
-                         className="SignInForm__input"
+                         className={"SignInForm__input"}
                          autoFocus={true}
-                         value={this.state.input}
+                         autoComplete="off"
+                         value={ this.state.input }
                          mask={[/\d/,' ', /\d/,/\d/,/\d/, ' ', /\d/,/\d/,/\d/,/\d/]}
-                         guide={false}
+                         guide={ false }
                          onChange={(event) => { this.onType(event) }}/>
             </form>
-            {!this.state.clicked ? <button
-              className="SignInForm__button"
-              disabled={this.state.buttonDisabled}
+            <button
+              className={"SignInForm__button"}
+              disabled={ this.state.buttonDisabled }
               onClick={(event) => this.onClickButton(event)}
               onMouseOver={(event) => this.onHoveredButton(event)}
               onMouseLeave={(event) => this.onLeaveButton(event)}
@@ -157,37 +151,61 @@ class SignInForm extends Component {
                             fill="freeze" />
                   </circle>
                   <circle cx="17.5" cy="45" r="2.5">
-                    <animate attributeType="CSS" attributeName="cx" id={"dotGo2"}
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotGo2"}
                              values="17.5; 50; 130" keyTimes="0; 0.5; 1"
-                             dur="0.4s" repeatCount="1" begin="indefinite"
+                             dur="0.3s" repeatCount="1" begin="indefinite"
                              fill="freeze"/>
-                    <animate attributeType="CSS" attributeName="cx" id={"dotBack2"}
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotBack2"}
                              from="130" to="17.5"
-                             dur="0.2s" repeatCount="1" begin="indefinite"
+                             dur="0.1s" repeatCount="1" begin="indefinite"
                              fill="freeze"/>
                   </circle>
                   <circle cx="32.5" cy="45" r="2.5">
-                    <animate attributeType="CSS" attributeName="cx" id={"dotGo3"}
-                             values="32.5; 75; 130" keyTimes="0; 0.6; 1"
-                             dur="0.4s" repeatCount="1" begin="indefinite"
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotGo3"}
+                             values="32.5; 75; 130" keyTimes="0; 0.8; 1"
+                             dur="0.2s" repeatCount="1" begin="indefinite"
                              fill="freeze" />
-                    <animate attributeType="CSS" attributeName="cx" id={"dotBack3"}
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotBack3"}
                              values="130; 32.5" keyTimes="0; 1"
                              dur="0.3s" repeatCount="1" begin="indefinite"
                              fill="freeze"/>
                   </circle>
                 </g>
               </svg>
-            </button> : null}
+            </button>
           </div>
         </CSSTransition>
-        <CSSTransition classNames={"SignInForm__instructions"} timeout={300} in={this.state.loaded} unmountOnExit>
-          <div style={{textAlign: 'center', marginTop: '60px'}}>
-            <a className="SignInForm__instructions" >Enter phone number to login or register</a>
+        <div style={ this.state.clicked ? { width: '650px', margin: 'auto' } : {display: 'none'}}>
+          <form
+            className={"SignInForm__validation"}
+            onClick={() => { document.getElementById('input').focus() }}
+          >
+            <button
+              id={'selector'}
+              className={"SignInForm__selector"}
+              onClick={(event) => this.onClickSelector(event)}
+            >
+              <a>+371</a>
+            </button>
+            <InputMask id={'input'}
+                       className="SignInForm__input"
+                       autoFocus={true}
+                       value={this.state.input}
+                       mask={[/\d/,' ', /\d/,/\d/,/\d/, ' ', /\d/,/\d/,/\d/,/\d/]}
+                       guide={false}
+                       onChange={(event) => { this.onType(event) }}/>
+          </form>
+        </div>
+        <CSSTransition classNames={"SignInForm__instructions"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
+          <div style={{ textAlign: 'center', marginTop: '60px' }}>
+            <a className={"SignInForm__instructions"} >Enter phone number to login or register</a>
           </div>
         </CSSTransition>
       </div>
-
     );
   }
 }
