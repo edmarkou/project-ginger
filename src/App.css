@@ -1,35 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,900');
 
-.App {
+.App__policy-div {
   text-align: center;
-  margin-top: 10%;
+  margin-bottom: 95px;
+  margin-top: 11%;
 }
-.App__SignInText {
-  width: 470px;
-  height: 37px;
-  font-family: Montserrat, sans-serif;
-  font-size: 30px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.4px;
-  text-align: center;
-  color: #000000;
-}
-.App__instructions {
-  width: 470px;
-  height: 28px;
-  font-family: Montserrat, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 2;
-  letter-spacing: 0.3px;
-  text-align: center;
-  color: #8e8e8e;
-  opacity: 0.5;
+.App__lock {
+  width: 11px;
+  height: 12px;
+  object-fit: contain;
+  margin-right: 5px;
+  cursor: pointer;
 }
 .App__policy {
   width: 131px;
@@ -42,17 +23,25 @@
   line-height: normal;
   letter-spacing: 0.9px;
   text-align: center;
+  margin-bottom: 95px;
+  margin-top: 11%;
   color: #8e8e8e;
+  stroke: #8e8e8e;
+  cursor: pointer;
 }
-.App__SignInText-enter {
-  opacity: 0.01;
-  transform: translateY(-10px);
-}
-.App__instructions-enter, .App__policy-enter {
+.App__policy-enter {
   opacity: 0.01;
   transform: translateY(10px);
 }
-.App__SignInText-enter-done, .App__instructions-enter-done, .App__policy-enter-done {
+.App__policy-enter-done {
   opacity: 1;
   transition: all 1s;
+}
+.App__policy:hover {
+  color: #00f1ff;
+  stroke: #00f1ff;
+}
+.App__policy:active {
+  color: #00dce8;
+  stroke: #00dce8;
 }

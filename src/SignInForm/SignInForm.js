@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import InputMask from 'react-text-mask';
 import './SignInForm.css';
-import dots from './dots.png';
-
-const regex = /[^0-9 ]+/g;
 
 class SignInForm extends Component {
   constructor(props) {
@@ -12,81 +10,202 @@ class SignInForm extends Component {
       loaded: false,
       input: '',
       buttonDisabled: true,
+      buttonHovered: false,
+      clicked: false,
     }
   }
-  componentDidMount(){
-    this.setState({loaded: true})
+  componentDidMount() {
+    this.setState({ loaded: true })
   }
-  onType(event){
-    if (!event.target.value.match(regex)){
-      let input = event.target.value;
-      if (this.state.input < input){
-        if (input.length === 2) input = input.slice(0,1) + ' ' + input.slice(1,2);
-        if (input.length === 6) input = input.slice(0,5) + ' ' + input.slice(5,6);
+  onType(event) {
+    if (event.target.value.length === 10) {
+      if (this.state.input.length < 10) {
+        document.getElementById("dotGo1").beginElementAt(0.2);
+        document.getElementById("dotGo2").beginElementAt(0.1);
+        document.getElementById("dotGo3").beginElementAt(0);
+        document.getElementById("enabledArrow").beginElementAt(0.2);
       }
-      if (this.state.input > input){
-        if (input.length === 2) input = input.slice(0,1);
-        if (input.length === 6) input = input.slice(0,5);
-      }
-      /*event.target.value.split('').forEach( (char, index) => {
-        if(char !== ' ' && (index === 1 || index === 5)) input = input + ' ' + char;
-        else if(char === ' ' && (index === 1 || index === 5)) input += char;
-        else if(char === ' ' && (index !== 1 || index !== 5)) {}
-        else if(char !== ' ' && (index !== 1 || index !== 5)) input += char;
-        console.log(input);
-      });
-      if (this.state.input > event.target.value){
-        if (input.length === 2) input = input.slice(0,1);
-        if (input.length === 6) input = input.slice(0,5);
-      }*/
-      if (input.length === 10) this.setState({input: input, buttonDisabled: false});
-      else this.setState({input: input, buttonDisabled: true});
+      this.setState({ input: event.target.value, buttonDisabled: false });
+    }
+    else {
+        if (!this.state.buttonDisabled) {
+          document.getElementById("dotBack1").beginElementAt(0);
+          document.getElementById("dotBack2").beginElementAt(0.1);
+          document.getElementById("dotBack3").beginElementAt(0.2);
+          document.getElementById("backArrow").beginElementAt(0);
+        }
+        this.setState({ input: event.target.value, buttonDisabled: true });
     }
   }
-  onClick(event){
+  onClickSelector(event) {
     event.preventDefault();
-    console.log('clicked')
+  }
+  onClickButton(event) {
+    event.preventDefault();
+    document.getElementById("goArrow").beginElementAt(0);
+    this.setState({ clicked: true });
+  }
+  onHoveredButton(event) {
+    if (!this.state.buttonHovered && !this.state.buttonDisabled) {
+      document.getElementById("hoveredArrow").beginElementAt(0);
+    }
+    this.setState({ buttonHovered: true });
+  }
+  onLeaveButton(event) {
+    if (this.state.buttonHovered && !this.state.buttonDisabled) {
+      document.getElementById("leaveArrow").beginElementAt(0.3);
+    }
+    this.setState({ buttonHovered: false })
   }
   render() {
     return (
-      <div>
-        <CSSTransition
-          classNames={"SignInForm"}
-          timeout={0}
-          in={this.state.loaded}
-          unmountOnExit>
-          <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', marginTop: '40px'}}>
+      <div className={"SignInForm"}>
+        <CSSTransition classNames={"SignInForm__SignInText"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
+          <div style={{ textAlign: 'center', marginTop: '10%', marginBottom: '60px' }}>
+            <a className={"SignInForm__SignInText"} >Sign In / Sign Up</a>
+          </div>
+        </CSSTransition>
+        <CSSTransition classNames={"SignInForm__form"} timeout={ 0 } in={ this.state.loaded } unmountOnExit>
+          <div style={ this.state.clicked ? {display: 'none'} : { width: '614px', margin: 'auto' }}>
             <form
-              className="SignInForm"
-              onClick={() => { document.getElementById('input').focus() }}
+              className={"SignInForm__form"}
+              onClick={ () => { document.getElementById('input').focus() }}
             >
               <button
-                className="SignInForm__selector"
-                onClick={(event) => this.onClick(event)}
+                id={"selector"}
+                className={"SignInForm__selector"}
+                onClick={(event) => this.onClickSelector(event)}
               >
-                <a>+371 <i className="fa fa-angle-down"/></a>
+                <a>+371 <i className="fa fa-angle-down"/> </a>
               </button>
-              <input
-                type="text"
-                autoComplete={'off'}
-                id={'input'}
-                className="SignInForm__input"
-                autoFocus={true}
-                value={this.state.input}
-                maxLength={10}
-                onChange={(event) => { this.onType(event) }}/>
+              <InputMask id={'input'}
+                         className={"SignInForm__input"}
+                         autoFocus={true}
+                         autoComplete="off"
+                         value={ this.state.input }
+                         mask={[/\d/,' ', /\d/,/\d/,/\d/, ' ', /\d/,/\d/,/\d/,/\d/]}
+                         guide={ false }
+                         onChange={(event) => { this.onType(event) }}/>
             </form>
             <button
-              className="SignInForm__button"
-              disabled={this.state.buttonDisabled}
-              onClick={(event) => this.onClick(event) }
+              className={"SignInForm__button"}
+              disabled={ this.state.buttonDisabled }
+              onClick={(event) => this.onClickButton(event)}
+              onMouseOver={(event) => this.onHoveredButton(event)}
+              onMouseLeave={(event) => this.onLeaveButton(event)}
             >
-              <img src={dots} alt={'...'}/>
+              <svg className={!this.state.buttonDisabled ? "SignInForm__button-svg" : null}
+                   xmlns="http://www.w3.org/2000/svg"
+                   width="150" height="90" viewBox="0 0 35 90"
+              >
+                <g fill="#fff" fillRule="evenodd">
+                  <g fill="none" fillRule="evenodd" stroke="#fff" strokeWidth="2">
+                    <path d="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5">
+                      <animate attributeType="CSS" attributeName="d" id={"enabledArrow"}
+                               values="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5;
+                               M50 45h28.5M69.5 35.5L79 45l-9.5 9.5;
+                               M-15 45h28.5M4.5 35.5L14 45l-9.5 9.5;
+                               M10 45h28.5M29.5 35.5L39 45l-9.5 9.5;
+                               M-5 45h28.5M14.5 35.5L24 45l-9.5 9.5;
+                               M0 45h28.5M19.5 35.5L29 45l-9.5 9.5"
+                               keyTimes="0; 0.2; 0.5; 0.75; 0.85; 1"
+                               dur="0.6s" repeatCount="1" begin="indefinite"
+                               fill="freeze"
+                      />
+                      <animate attributeType="CSS" attributeName="d" id={"hoveredArrow"}
+                               from="M0 45h28.5M19.5 35.5L29 45l-9.5 9.5" to="M10 45h28.5M29.5 35.5L39 45l-9.5 9.5"
+                               dur="0.2s" repeatCount="1" begin="indefinite"
+                               fill="freeze"
+                      />
+                      <animate attributeType="CSS" attributeName="d" id={"goArrow"}
+                               from="M0 11h28.5M19.5 1.5L29 11l-9.5 9.5" to="M100 11h28.5M129.5 1.5L139 11l-9.5 9.5"
+                               dur="0.2s" repeatCount="1" begin="indefinite"
+                               fill="freeze"
+                      />
+                      <animate attributeType="CSS" attributeName="d" id={"leaveArrow"}
+                               values="M10 45h28.5M29.5 35.5L39 45l-9.5 9.5;
+                               M-5 45h28.5M14.5 35.5L24 45l-9.5 9.5;
+                               M5 45h28.5M24.5 35.5L34 45l-9.5 9.5;
+                               M0 45h28.5M19.5 35.5L29 45l-9.5 9.5"
+                               dur="0.4s" repeatCount="1" begin="indefinite"
+                               fill="freeze"
+                      />
+                      <animate attributeType="CSS" attributeName="d" id={"backArrow"}
+                               from="M0 45h28.5M19.5 35.5L29 45l-9.5 9.5" to="M-90 45h28.5M-71.5 35.5L-61 45l-9.5 9.5"
+                               dur="0.2s" repeatCount="1" begin="indefinite"
+                               fill="freeze"
+                      />
+                    </path>
+                  </g>
+                  <circle cx="2.5" cy="45" r="2.5">
+                    <animate
+                            attributeType="CSS" attributeName="cx" id={"dotGo1"}
+                            values="2.5; 17.5; 130" keyTimes="0; 0.3; 1"
+                            dur="0.4s" repeatCount="1" begin="indefinite"
+                            fill="freeze"/>
+                    <animate
+                            attributeType="CSS" attributeName="cx" id={"dotBack1"}
+                            values="130; 2.5" keyTimes="0; 1"
+                            dur="0.1s"
+                            repeatCount="1" begin="indefinite"
+                            fill="freeze" />
+                  </circle>
+                  <circle cx="17.5" cy="45" r="2.5">
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotGo2"}
+                             values="17.5; 50; 130" keyTimes="0; 0.5; 1"
+                             dur="0.3s" repeatCount="1" begin="indefinite"
+                             fill="freeze"/>
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotBack2"}
+                             from="130" to="17.5"
+                             dur="0.1s" repeatCount="1" begin="indefinite"
+                             fill="freeze"/>
+                  </circle>
+                  <circle cx="32.5" cy="45" r="2.5">
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotGo3"}
+                             values="32.5; 75; 130" keyTimes="0; 0.8; 1"
+                             dur="0.2s" repeatCount="1" begin="indefinite"
+                             fill="freeze" />
+                    <animate
+                             attributeType="CSS" attributeName="cx" id={"dotBack3"}
+                             values="130; 32.5" keyTimes="0; 1"
+                             dur="0.3s" repeatCount="1" begin="indefinite"
+                             fill="freeze"/>
+                  </circle>
+                </g>
+              </svg>
             </button>
           </div>
         </CSSTransition>
+        <div style={ this.state.clicked ? { width: '650px', margin: 'auto' } : {display: 'none'}}>
+          <form
+            className={"SignInForm__validation"}
+            onClick={() => { document.getElementById('input').focus() }}
+          >
+            <button
+              id={'selector'}
+              className={"SignInForm__selector"}
+              onClick={(event) => this.onClickSelector(event)}
+            >
+              <a>+371</a>
+            </button>
+            <InputMask id={'input'}
+                       className="SignInForm__input"
+                       autoFocus={true}
+                       value={this.state.input}
+                       mask={[/\d/,' ', /\d/,/\d/,/\d/, ' ', /\d/,/\d/,/\d/,/\d/]}
+                       guide={false}
+                       onChange={(event) => { this.onType(event) }}/>
+          </form>
+        </div>
+        <CSSTransition classNames={"SignInForm__instructions"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
+          <div style={{ textAlign: 'center', marginTop: '60px' }}>
+            <a className={"SignInForm__instructions"} >Enter phone number to login or register</a>
+          </div>
+        </CSSTransition>
       </div>
-
     );
   }
 }
