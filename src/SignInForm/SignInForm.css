@@ -59,6 +59,7 @@
     text-align: center;
     color: #8e8e8e;
     opacity: 0.5;
+    fill: #8e8e8e;
     cursor: default;
 }
 .SignInForm__SignInText-enter {
@@ -114,7 +115,7 @@
 /*-------SignInButton--------*/
 .SignInForm__button {
     width: 150px;
-    height: 90px;
+    height: 92px;
     padding: 0;
     margin-right: auto;
     margin-left: 12px;
@@ -155,13 +156,113 @@
 }
 /*-------SignInValidation--------*/
 .SignInForm__validation {
-    width: 650px;
-    height: 130px;
-    background: #ffffff;
+    width: 700px;
+    height: 150px;
+    background-color: #ffffff;
+    box-shadow: 12px 12px 30px 0 rgba(0, 0, 0, 0.1);
+    /*animation-name: validation-appear;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;*/
+    margin: -30px auto -28px;
+}
+/*@keyframes validation-appear {
+    0% {
+        width: 700px;
+    }
+    50% {
+        width: 720px;
+    }
+    100% {
+        width: 700px;
+    }
+}*/
+.SignInForm__validation-disabled {
+    width: 600px;
+    height: 90px;
+    margin: auto;
+    background-color: #ffffff;
+    box-shadow: 12px 12px 30px 0 rgba(0, 0, 0, 0.1);
+    transition: all 2s;
+}
+.SignInForm__validation-div-enabled {
+     width: 700px;
+     margin: auto;
+ }
+
+.SignInForm__codeInput {
+    width: 40px;
+    height: 60px;
+    margin-top: 44px;
+    margin-bottom: 44px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    outline: none;
+    padding: 0;
+    border-radius: 4px;
+    background-color: #ffffff;
     border: solid 1px #e6e6e6;
-    margin-left: auto;
-    margin-right: auto;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    box-shadow: 0 4px 8px 0 #e6e6e6, 0 6px 20px 0 #e6e6e6;
+}
+.SignInForm__selectorNumber {
+    width: 70px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #8e8e8e;
+    border: none;
+    outline: none;
+}
+.SignInForm__number {
+    margin-left: 10px;
+    width: 88px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+.SignInForm__changeNumber {
+    margin-left: 30px;
+    padding: 0;
+    width: 200px;
+    height: 90px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+}
+.SignInForm__changeNumber:hover {
+    background-color: #F3F3F3;
+    border-radius: 4px;
+}
+.div-instructions {
+    text-align: center;
+    display: block;
+}
+.SignInForm__newInstructions {
+    width: 470px;
+    height: 28px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #000000;
+    cursor: default;
 }
