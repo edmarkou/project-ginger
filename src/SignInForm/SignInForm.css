@@ -160,22 +160,20 @@
     height: 150px;
     background-color: #ffffff;
     box-shadow: 12px 12px 30px 0 rgba(0, 0, 0, 0.1);
-    /*animation-name: validation-appear;
+    animation-name: validation-appear;
     animation-fill-mode: forwards;
-    animation-duration: 1s;*/
+    animation-duration: 0.3s;
     margin: -30px auto -28px;
 }
-/*@keyframes validation-appear {
+@keyframes validation-appear {
     0% {
-        width: 700px;
-    }
-    50% {
-        width: 720px;
+        transform: translateX(5px);
+        width: 705px;
     }
     100% {
         width: 700px;
     }
-}*/
+}
 .SignInForm__validation-disabled {
     width: 600px;
     height: 90px;
@@ -243,6 +241,17 @@
     border: none;
     outline: none;
     background-color: #ffffff;
+    animation-name: button-appear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+}
+@keyframes button-appear {
+    0% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 .SignInForm__changeNumber:hover {
     background-color: #F3F3F3;

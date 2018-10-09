@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import InputMask from 'react-text-mask';
+import smiley from './smiley.png';
 import './SignInForm.css';
 
 class SignInForm extends Component {
@@ -92,14 +93,13 @@ class SignInForm extends Component {
                   dur="0.2s" repeatCount="1" begin="indefinite"
                   fill="freeze"/>
               </text>
-              <text textAnchor={'middle'} x={'200'} y={'120'} className={"SignInForm__SignInText"} >
-                Sign In / Sign Up
+              <image width={'40px'} height={'40px'} xlinkHref={smiley} x={'160'} y={'120'}>
                 <animate
                   attributeType="SVG" attributeName="y" id={"emojiMove"}
-                  from={'120'} to={'70'}
-                  dur="0.3s" repeatCount="1" begin="indefinite"
+                  from={'120'} to={'40'}
+                  dur="0.2s" repeatCount="1" begin="indefinite"
                   fill="freeze"/>
-              </text>
+              </image>
             </svg>
           </div>
         </CSSTransition>
@@ -322,8 +322,8 @@ class SignInForm extends Component {
                 Enter phone number to login or register
                 <animate
                   attributeType="SVG" attributeName="y" id={"textMoveOnClick"}
-                  from={'74'} to={'40'}
-                  dur="0.2s" repeatCount="1" begin="indefinite"
+                  values={'74; 40; -20'} keyTimes={'0; 0.5; 1'}
+                  dur="0.4s" repeatCount="1" begin="indefinite"
                   fill="freeze"/>
                 <animate
                   attributeType="CSS" attributeName="opacity" id={"textDisappearOnClick"}

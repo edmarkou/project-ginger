@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59ff90ea-2587-4a25-b77d-172db693f393" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/SignInForm/smiley.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SignInForm/SignInForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/SignInForm/SignInForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SignInForm/SignInForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/SignInForm/SignInForm.js" afterDir="false" />
     </list>
@@ -21,40 +19,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SignInForm.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SignInForm.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="345" column="27" selection-start-line="345" selection-start-column="27" selection-end-line="345" selection-end-column="27" />
+            <state relative-caret-position="288">
+              <caret line="325" column="42" lean-forward="true" selection-start-line="325" selection-start-column="42" selection-end-line="325" selection-end-column="42" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#2571#9140#0" />
-                <element signature="e#9151#13795#0" />
-                <element signature="e#9530#10162#0" />
-                <element signature="e#10177#10902#0" />
-                <element signature="e#10917#11642#0" />
-                <element signature="e#11657#12383#0" />
-                <element signature="e#12398#13123#0" />
-                <element signature="e#13138#13760#0" />
+                <element signature="e#2692#4092#0" />
+                <element signature="e#5903#8460#0" />
+                <element signature="e#10714#15380#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignInForm.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/App.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -73,7 +48,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="signInForm__button" />
       </map>
     </option>
   </component>
@@ -92,9 +67,9 @@
         <option value="$PROJECT_DIR$/src/assets/lockClicked.svg" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/SignInForm/SignInForm.css" />
-        <option value="$PROJECT_DIR$/src/SignInForm/SignInForm.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/SignInForm/SignInForm.js" />
+        <option value="$PROJECT_DIR$/src/SignInForm/SignInForm.css" />
       </list>
     </option>
   </component>
@@ -124,6 +99,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,7 +127,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -169,14 +144,14 @@
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\assets\" />
-      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\" />
-      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\SignInForm" />
-      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\assets\fonts" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\SignInForm" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\SignInForm" />
+      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\assets\" />
+      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\" />
+      <recent name="C:\Users\Destroyeris3000\WebstormProjects\project-ginger\src\assets\fonts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -212,15 +187,17 @@
       <workItem from="1538732269505" duration="9301000" />
       <workItem from="1538824732410" duration="18627000" />
       <workItem from="1539003805205" duration="9283000" />
-      <workItem from="1539080828234" duration="11300000" />
+      <workItem from="1539080828234" duration="12701000" />
+      <workItem from="1539116029888" duration="5185000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180634000" />
+    <option name="totallyTimeSpent" value="187220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.24983476" />
       <window_info anchor="bottom" id="TODO" order="11" />
@@ -257,18 +234,40 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5865">
+          <caret line="345" column="27" selection-start-line="345" selection-start-column="27" selection-end-line="345" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#2692#4092#0" />
+            <element signature="e#5903#8460#0" />
+            <element signature="e#10714#15380#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5032">
           <caret line="296" column="30" selection-start-line="296" selection-start-column="30" selection-end-line="296" selection-end-column="30" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#2571#9140#0" />
-            <element signature="e#9151#13795#0" />
-            <element signature="e#9530#10162#0" />
-            <element signature="e#10177#10902#0" />
-            <element signature="e#10917#11642#0" />
-            <element signature="e#11657#12383#0" />
-            <element signature="e#12398#13123#0" />
-            <element signature="e#13138#13760#0" />
+            <element signature="e#2692#4092#0" />
+            <element signature="e#5903#8460#0" />
+            <element signature="e#10714#15380#0" />
           </folding>
         </state>
       </provider>
@@ -286,14 +285,9 @@
           <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#2571#9140#0" />
-            <element signature="e#9151#13795#0" />
-            <element signature="e#9530#10162#0" />
-            <element signature="e#10177#10902#0" />
-            <element signature="e#10917#11642#0" />
-            <element signature="e#11657#12383#0" />
-            <element signature="e#12398#13123#0" />
-            <element signature="e#13138#13760#0" />
+            <element signature="e#2692#4092#0" />
+            <element signature="e#5903#8460#0" />
+            <element signature="e#10714#15380#0" />
           </folding>
         </state>
       </provider>
@@ -507,35 +501,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.js">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="345" column="27" selection-start-line="345" selection-start-column="27" selection-end-line="345" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#2571#9140#0" />
-            <element signature="e#9151#13795#0" />
-            <element signature="e#9530#10162#0" />
-            <element signature="e#10177#10902#0" />
-            <element signature="e#10917#11642#0" />
-            <element signature="e#11657#12383#0" />
-            <element signature="e#12398#13123#0" />
-            <element signature="e#13138#13760#0" />
-          </folding>
+        <state relative-caret-position="527">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+        <state relative-caret-position="135">
+          <caret line="164" column="27" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
+    <entry file="file://$PROJECT_DIR$/src/SignInForm/SignInForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="288">
+          <caret line="325" column="42" lean-forward="true" selection-start-line="325" selection-start-column="42" selection-end-line="325" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#2692#4092#0" />
+            <element signature="e#5903#8460#0" />
+            <element signature="e#10714#15380#0" />
+          </folding>
         </state>
       </provider>
     </entry>
