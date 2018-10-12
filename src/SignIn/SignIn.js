@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import InputMask from 'react-text-mask';
-import smiley from './smiley.png';
+import smiley from './SignInAssets/smiley.png';
+/*import clock from './clock.png';
+import error from './error.svg';
+import invalid from './invalid.png';
+import surprised from './surprised.png';*/
 import './SignInForm.css';
+import SignIn__Instructions from "./SignIn__Instructions";
+import SignIn__Validation from "./SignIn__Validation";
 
-class SignInForm extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,12 +19,6 @@ class SignInForm extends Component {
       buttonDisabled: true,
       buttonHovered: false,
       clicked: false,
-      code1: '',
-      code2: '',
-      code3: '',
-      code4: '',
-      code5: '',
-      code6: ''
     }
   }
   componentDidMount() {
@@ -49,36 +49,32 @@ class SignInForm extends Component {
   }
   onClickButton(event) {
     event.preventDefault();
+    this.setState({ clicked: true });
     document.getElementById("goArrow").beginElementAt(0);
     document.getElementById("textMoveOnClick").beginElementAt(0.2);
-    document.getElementById("signInTextMove").beginElementAt(0.2);
     document.getElementById("textDisappearOnClick").beginElementAt(0.2);
     document.getElementById("signInTextDisappear").beginElementAt(0.2);
     document.getElementById("newTextAppear1").beginElementAt(0.2);
     document.getElementById("newTextAppear2").beginElementAt(0.2);
     document.getElementById("emojiMove").beginElementAt(0.2);
-    this.setState({ clicked: true });
   }
-  onHoveredButton(event) {
+  onHoveredButton() {
     if (!this.state.buttonHovered && !this.state.buttonDisabled) {
       document.getElementById("hoveredArrow").beginElementAt(0);
     }
     this.setState({ buttonHovered: true });
   }
-  onLeaveButton(event) {
+  onLeaveButton() {
     if (this.state.buttonHovered && !this.state.buttonDisabled) {
       document.getElementById("leaveArrow").beginElementAt(0.3);
     }
     this.setState({ buttonHovered: false })
   }
-  onCodeInputType(event){
-    this.setState({ [event.target.id]: event.target.value });
-  }
   render() {
     return (
-      <div className={"SignInForm"}>
+      <div className={"SignIn"}>
         <CSSTransition classNames={"SignInForm__SignInText"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
-          <div style={{ textAlign: 'center', marginTop: '110px', marginBottom: '30px', display: 'block' }}>
+          <div style={{ textAlign: 'center', marginTop: '7.9%', marginBottom: '30px', display: 'block' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width='400px' height='90px'>
               <text textAnchor={'middle'} x={'200'} y={'70'} className={"SignInForm__SignInText"} >
                 Sign In / Sign Up
@@ -90,7 +86,7 @@ class SignInForm extends Component {
                 <animate
                   attributeType="CSS" attributeName="opacity" id={"signInTextDisappear"}
                   from={'1'} to={'0'}
-                  dur="0.2s" repeatCount="1" begin="indefinite"
+                  dur="0.2s" repeatCount="1" begin="signInTextMove.begin"
                   fill="freeze"/>
               </text>
               <image width={'40px'} height={'40px'} xlinkHref={smiley} x={'160'} y={'120'}>
@@ -130,8 +126,8 @@ class SignInForm extends Component {
                 className={"SignInForm__button"}
                 disabled={ this.state.buttonDisabled }
                 onClick={(event) => this.onClickButton(event)}
-                onMouseOver={(event) => this.onHoveredButton(event)}
-                onMouseLeave={(event) => this.onLeaveButton(event)}
+                onMouseOver={() => this.onHoveredButton()}
+                onMouseLeave={() => this.onLeaveButton()}
               >
                 <svg className={!this.state.buttonDisabled ? "SignInForm__button-svg" : null}
                      xmlns="http://www.w3.org/2000/svg"
@@ -218,141 +214,11 @@ class SignInForm extends Component {
               </button>
             </div>
           </CSSTransition> :
-        <div className="SignInForm__validation-div-enabled">
-            <form
-              className="SignInForm__validation"
-            >
-              <button className={"SignInForm__changeNumber"}>
-                <a id={"selectorNumber"} className={"SignInForm__selectorNumber"}>+371</a>
-                <a className={"SignInForm__number"}>{this.state.input}:</a>
-              </button>
-              <InputMask className="SignInForm__codeInput"
-                         id="code1"
-                         style={{marginLeft: '60px'}}
-                         autoFocus={true}
-                         autoComplete="off"
-                         value={this.state.code1}
-                         onChange={(event) => {
-                           if (event.target.value.length === 1)
-                             document.getElementById("code2").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="SignInForm__codeInput"
-                         id="code2"
-                         style={{marginLeft: '6px'}}
-                         autoComplete="off"
-                         value={this.state.code2}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code2.length !== 0)
-                             document.getElementById("code1").focus();
-                           else
-                             document.getElementById("code3").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="SignInForm__codeInput"
-                         id="code3"
-                         style={{marginLeft: '6px'}}
-                         autoComplete="off"
-                         value={this.state.code3}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code3.length !== 0)
-                             document.getElementById("code2").focus();
-                           else
-                             document.getElementById("code4").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="SignInForm__codeInput"
-                         id="code4"
-                         style={{marginLeft: '20px'}}
-                         autoComplete="off"
-                         value={this.state.code4}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code4.length !== 0)
-                             document.getElementById("code3").focus();
-                           else
-                             document.getElementById("code5").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="SignInForm__codeInput"
-                         id="code5"
-                         style={{marginLeft: '6px'}}
-                         autoComplete="off"
-                         value={this.state.code5}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code5.length !== 0)
-                             document.getElementById("code4").focus();
-                           else
-                             document.getElementById("code6").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="SignInForm__codeInput"
-                         id="code6"
-                         style={{marginLeft: '6px'}}
-                         autoComplete="off"
-                         value={this.state.code6}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code6.length !== 0)
-                             document.getElementById("code5").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-            </form>
-        </div>}
-        <CSSTransition classNames={"SignInForm__instructions"} timeout={ 300 } in={ this.state.loaded } unmountOnExit>
-          <div className={"div-instructions"}>
-            <svg xmlns="http://www.w3.org/2000/svg" width='400px' height='120px'>
-              <text textAnchor='middle' x='200' y='74' className={"SignInForm__instructions"} id={"instructions"}>
-                Enter phone number to login or register
-                <animate
-                  attributeType="SVG" attributeName="y" id={"textMoveOnClick"}
-                  values={'74; 40; -20'} keyTimes={'0; 0.5; 1'}
-                  dur="0.4s" repeatCount="1" begin="indefinite"
-                  fill="freeze"/>
-                <animate
-                  attributeType="CSS" attributeName="opacity" id={"textDisappearOnClick"}
-                  from={'0.5'} to={'0'}
-                  dur="0.2s" repeatCount="1" begin="indefinite"
-                  fill="freeze"/>
-              </text>
-              <text textAnchor='middle' x='200' y='140' className={"SignInForm__newInstructions"} id={"instructions"}>
-                Введите код подтверждения,
-                <animate
-                  attributeType="SVG" attributeName="y" id={"newTextAppear1"}
-                  from={'140'} to={'74'}
-                  dur="0.2s" repeatCount="1" begin="indefinite"
-                  fill="freeze"/>
-              </text>
-              <text textAnchor='middle' x='200' y='160' className={"SignInForm__newInstructions"} id={"instructions"}>
-                который мы отправили на +371 {this.state.input}
-                <animate
-                  attributeType="SVG" attributeName="y" id={"newTextAppear2"}
-                  from={'160'} to={'94'}
-                  dur="0.2s" repeatCount="1" begin="indefinite"
-                  fill="freeze"/>
-              </text>
-            </svg>
-          </div>
-        </CSSTransition>
+        <SignIn__Validation input={this.state.input}/>}
+        <SignIn__Instructions input={this.state.input} loaded={this.state.loaded}/>
       </div>
     );
   }
 }
 
-export default SignInForm;
+export default SignIn;

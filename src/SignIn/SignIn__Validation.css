@@ -1,0 +1,148 @@
+.Validation {
+    width: 700px;
+    height: 150px;
+    background-color: #ffffff;
+    box-shadow: 12px 12px 30px 6px rgba(0, 0, 0, 0.1);
+    animation-name: validation-appear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+    margin: -30px auto -28px;
+}
+@keyframes validation-appear {
+    0% {
+        transform: translateX(5px);
+        width: 705px;
+    }
+    100% {
+        width: 700px;
+    }
+}
+.Validation-div-enabled {
+    width: 700px;
+    margin: auto;
+}
+.CodeInput {
+    width: 40px;
+    height: 60px;
+    margin-top: 44px;
+    margin-bottom: 44px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    outline: none;
+    padding: 0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #e6e6e6;
+}
+.CodeInput::placeholder {
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    opacity: 0.5;
+}
+.SelectorNumber {
+    width: 70px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #8e8e8e;
+    border: none;
+    outline: none;
+}
+.Number {
+    margin-left: 10px;
+    width: 88px;
+    height: 22px;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+.ChangeNumber {
+    margin-left: 25px;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    width: 200px;
+    height: 90px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    animation-name: button-appear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+}
+@keyframes button-appear {
+    100% {
+        margin-left: 30px;
+    }
+}
+.ChangeNumber:hover {
+    background-color: #F3F3F3;
+    border-radius: 4px;
+}
+.animate-codeInput {
+    margin-left: 416px;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-name: animateCode;
+}
+@keyframes animateCode {
+    50% {
+        margin-left: 416px;
+    }
+    100% {
+        margin-left: 60px;
+    }
+}
+.animate-opacity {
+    opacity: 0;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-name: animateOpacity;
+}
+@keyframes animateOpacity {
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.animate-noOpacity {
+    opacity: 1;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-name: animateNoOpacity;
+}
+@keyframes animateNoOpacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

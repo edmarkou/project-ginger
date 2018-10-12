@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group'
-import SignInForm from "./SignInForm/SignInForm";
+import SignIn from "./SignIn/SignIn";
 import './App.css';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SignInForm/>
+        <SignIn/>
         <CSSTransition classNames={"App__policy"} timeout={300} in={this.state.loaded} unmountOnExit>
           <div className="App__policy-div">
             <a className="App__policy">
