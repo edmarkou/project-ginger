@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputMask from 'react-text-mask';
+import { connect } from 'react-redux';
 import './SignIn__Validation.css';
+import { refreshClicked } from "../actions";
 
 class SignIn__Validation extends Component {
   constructor(props) {
@@ -15,10 +17,18 @@ class SignIn__Validation extends Component {
       code6: '',
       refreshButtonColor: '#CCCCCC',
       refreshClicked: false,
+      error: false
     }
   }
   onCodeInputType(event){
     this.setState({ [event.target.id]: event.target.value });
+    let code = this.state.code1 + this.state.code2 + this.state.code3 + this.state.code4 + this.state.code5 + this.state.code6;
+    if (code.length === 5 && event.target.value.length === 1) {
+      this.setState({error: true, refreshButtonColor: '#F55E33'});
+      if(this.props.clickRefreshCount === 0) document.getElementById("smileyAnimationDisappear").beginElementAt(0);
+      if(this.props.clickRefreshCount === 1) document.getElementById("firstRefreshDisappear").beginElementAt(0);
+      document.getElementById("error").beginElementAt(0);
+    }
   }
   onRefreshHover() {
     if (!this.state.refreshClicked) {
@@ -28,126 +38,190 @@ class SignIn__Validation extends Component {
   }
   onRefreshLeave() {
     if (!this.state.refreshClicked) {
-      this.setState({ refreshButtonColor: '#CCCCCC' });
+      if(!this.state.error)
+        this.setState({ refreshButtonColor: '#CCCCCC' });
+      else
+        this.setState({ refreshButtonColor: '#F55E33'});
       document.getElementById("rotateBack").beginElementAt(0);
     }
   }
   clickedRefresh() {
-    this.setState({ refreshClicked: true });
-    setTimeout(() => {
-      this.setState({ refreshClicked: false, refreshButtonColor: '#CCCCCC'});
-    }, 4000)
+    if(!this.state.refreshClicked) {
+      document.getElementById("rotate360").beginElementAt(0);
+      document.getElementById("buttonDisappear").beginElementAt(0);
+      switch (this.props.clickRefreshCount){
+        case 0:
+          if (this.state.error) document.getElementById("errorAnimationDisappear").beginElementAt(0);
+          else document.getElementById("smileyAnimationDisappear").beginElementAt(0);
+          document.getElementById("clockAnimationUp").beginElementAt(0);
+          document.getElementById("firstRefresh").beginElementAt(3.9);
+          break;
+        case 1:
+          if (this.state.error) document.getElementById("errorAnimationDisappear").beginElementAt(0);
+          else document.getElementById("firstRefreshDisappear").beginElementAt(0);
+          document.getElementById("clockAnimationUp").beginElementAt(0);
+          document.getElementById("error").beginElementAt(3.9);
+          break;
+        default:
+          break;
+      }
+      this.props.refreshClicked(this.props.clickRefreshCount);
+      setTimeout(() => {
+        this.setState({ refreshClicked: false, refreshButtonColor: '#CCCCCC'});
+        document.getElementById("code1").focus();
+      }, 4000)
+    }
+    this.setState({
+      refreshClicked: true,
+      error: false,
+      code1: '',
+      code2: '',
+      code3: '',
+      code4: '',
+      code5: '',
+      code6: '',
+    });
   }
   render() {
     return (
       <div className="Validation-div-enabled">
-        <form className="Validation">
+        <form className={this.state.error ? "Validation Validation-error" : "Validation"}>
           <svg xmlns="http://www.w3.org/2000/svg" width={'700px'} height={'150px'}>
-            <foreignObject className={this.state.refreshClicked ? "animate-noOpacity" : null} x='0px' y='0'
-                           height={'150px'} width={'230px'}>
-              <button className={"ChangeNumber"} disabled={this.state.refreshClicked}>
-                <a id={"selectorNumber"} className={"SelectorNumber"}>+371</a>
-                <a className={"Number"}>{this.props.input}:</a>
-              </button>
-            </foreignObject>
-            <foreignObject className={this.state.refreshClicked ? 'animate-noOpacity' : 'animate-opacity'}
-                           id={'codeInput'} x='230px' y='0' height={'150px'} width={'356px'}>
-              <InputMask
-                className={this.state.refreshClicked ? "CodeInput" : "CodeInput animate-codeInput"}
-                id="code1"
-                autoFocus={true}
-                disabled={this.state.refreshClicked ? "disabled" : null}
-                autoComplete="off"
-                value={this.state.code1}
-                onChange={(event) => {
-                  if (event.target.value.length === 1)
-                    document.getElementById("code2").focus();
-                  this.onCodeInputType(event);
-                }}
-                mask={[/\d/]}
-                guide={false}
+            <g>
+              <foreignObject x='0px' y='0' height={'150px'} width={'230px'}>
+                <button className={"ChangeNumber"} disabled={this.state.refreshClicked}>
+                  <a id={"selectorNumber"} className={"SelectorNumber"}>+371</a>
+                  <a className={"Number"}>{this.props.input}:</a>
+                </button>
+              </foreignObject>
+              <animateTransform attributeName="transform" id={'buttonDisappear'}
+                                attributeType="XML"
+                                type="translate"
+                                from="0, 0" to="30, 0" dur="0.2s"
+                                fill={"freeze"} begin={'indefinite'}
+                                repeatCount="1"
               />
-              <InputMask className="CodeInput"
-                         id="code2"
-                         style={{marginLeft: '6px'}}
-                         disabled={this.state.refreshClicked ? "disabled" : null}
-                         autoComplete="off"
-                         value={this.state.code2}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code2.length !== 0)
-                             document.getElementById("code1").focus();
-                           else
-                             document.getElementById("code3").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
+              <animateTransform attributeName="transform"
+                                attributeType="XML"
+                                type="translate"
+                                from="30, 0" to="0, 0" dur="0.2s"
+                                fill={"freeze"} begin={'buttonDisappear.begin + 3.7s'}
+                                repeatCount="1"
               />
-              <InputMask className="CodeInput"
-                         id="code3"
-                         style={{marginLeft: '6px'}}
-                         disabled={this.state.refreshClicked ? "disabled" : null}
-                         autoComplete="off"
-                         value={this.state.code3}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code3.length !== 0)
-                             document.getElementById("code2").focus();
-                           else
-                             document.getElementById("code4").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
+              <animate attributeName="opacity"
+                       attributeType={"CSS"}
+                       from={'0'} to={'1'}
+                       fill={"freeze"} begin={'buttonDisappear.begin + 3.7s'}
+                       repeatCount={"1"} dur={"0.2s"}
               />
-              <InputMask className="CodeInput"
-                         id="code4"
-                         style={{marginLeft: '20px'}}
-                         disabled={this.state.refreshClicked ? "disabled" : null}
-                         autoComplete="off"
-                         value={this.state.code4}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code4.length !== 0)
-                             document.getElementById("code3").focus();
-                           else
-                             document.getElementById("code5").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
+              <animate attributeName="opacity"
+                       attributeType={"CSS"}
+                       from={'1'} to={'0'}
+                       fill={"freeze"} begin={'buttonDisappear.begin'}
+                       repeatCount={"1"} dur={"0.2s"}
               />
-              <InputMask className="CodeInput"
-                         id="code5"
-                         style={{marginLeft: '6px'}}
-                         disabled={this.state.refreshClicked ? "disabled" : null}
-                         autoComplete="off"
-                         placeholder={8}
-                         value={this.state.code5}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code5.length !== 0)
-                             document.getElementById("code4").focus();
-                           else
-                             document.getElementById("code6").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-              <InputMask className="CodeInput"
-                         id="code6"
-                         style={{marginLeft: '6px'}}
-                         disabled={this.state.refreshClicked ? "disabled" : null}
-                         autoComplete="off"
-                         placeholder={8}
-                         value={this.state.code6}
-                         onChange={(event) => {
-                           if (event.target.value.length === 0 && this.state.code6.length !== 0)
-                             document.getElementById("code5").focus();
-                           this.onCodeInputType(event);
-                         }}
-                         mask={[/\d/]}
-                         guide={false}
-              />
-            </foreignObject>
+            </g>
+            <g>
+              <foreignObject className={this.state.refreshClicked ? 'animate-noOpacity' : 'animate-opacity'}
+                             id={'codeInput'} x='230px' y='0' height={'150px'} width={'356px'}>
+                <InputMask
+                  className={this.state.refreshClicked ? "CodeInput" : "CodeInput animate-codeInput"}
+                  id="code1"
+                  autoFocus={true}
+                  style={this.state.error ? {color: '#f55e33', border: 'solid 1px #f55e33'} : null}
+                  disabled={this.state.refreshClicked ? "disabled" : null}
+                  autoComplete="off"
+                  value={this.state.code1}
+                  onChange={(event) => {
+                    if (event.target.value.length === 1)
+                      document.getElementById("code2").focus();
+                    this.onCodeInputType(event);
+                  }}
+                  mask={[/\d/]}
+                  guide={false}
+                />
+                <InputMask className="CodeInput"
+                           id="code2"
+                           style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
+                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           autoComplete="off"
+                           value={this.state.code2}
+                           onChange={(event) => {
+                             if (event.target.value.length === 0 && this.state.code2.length !== 0)
+                               document.getElementById("code1").focus();
+                             else
+                               document.getElementById("code3").focus();
+                             this.onCodeInputType(event);
+                           }}
+                           mask={[/\d/]}
+                           guide={false}
+                />
+                <InputMask className="CodeInput"
+                           id="code3"
+                           style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
+                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           autoComplete="off"
+                           value={this.state.code3}
+                           onChange={(event) => {
+                             if (event.target.value.length === 0 && this.state.code3.length !== 0)
+                               document.getElementById("code2").focus();
+                             else
+                               document.getElementById("code4").focus();
+                             this.onCodeInputType(event);
+                           }}
+                           mask={[/\d/]}
+                           guide={false}
+                />
+                <InputMask className="CodeInput"
+                           id="code4"
+                           style={this.state.error ? {marginLeft: '20px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '20px'}}
+                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           autoComplete="off"
+                           value={this.state.code4}
+                           onChange={(event) => {
+                             if (event.target.value.length === 0 && this.state.code4.length !== 0)
+                               document.getElementById("code3").focus();
+                             else
+                               document.getElementById("code5").focus();
+                             this.onCodeInputType(event);
+                           }}
+                           mask={[/\d/]}
+                           guide={false}
+                />
+                <InputMask className="CodeInput"
+                           id="code5"
+                           style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
+                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           autoComplete="off"
+                           placeholder={8}
+                           value={this.state.code5}
+                           onChange={(event) => {
+                             if (event.target.value.length === 0 && this.state.code5.length !== 0)
+                               document.getElementById("code4").focus();
+                             else
+                               document.getElementById("code6").focus();
+                             this.onCodeInputType(event);
+                           }}
+                           mask={[/\d/]}
+                           guide={false}
+                />
+                <InputMask className="CodeInput"
+                           id="code6"
+                           style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
+                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           autoComplete="off"
+                           placeholder={8}
+                           value={this.state.code6}
+                           onChange={(event) => {
+                             if (event.target.value.length === 0 && this.state.code6.length !== 0)
+                               document.getElementById("code5").focus();
+                             this.onCodeInputType(event);
+                           }}
+                           mask={[/\d/]}
+                           guide={false}
+                />
+              </foreignObject>
+            </g>
             <defs>
               <linearGradient x1="5.29423494%" y1="21.9601149%" x2="82.112707%" y2="21.9601149%" id="linearGradient-1">
                 <stop stopColor="#00F2FF" stopOpacity="0" offset="0%"/>
@@ -162,15 +236,9 @@ class SignIn__Validation extends Component {
             <g stroke="none" strokeWidth="1" fill="#ffffff" fillRule="evenodd">
               <g transform="translate(610, 59)" fillRule="nonzero">
                 <g
-                  onMouseEnter={() => {
-                    this.onRefreshHover()
-                  }}
-                  onMouseLeave={() => {
-                    this.onRefreshLeave()
-                  }}
-                  onClick={() => {
-                    this.clickedRefresh()
-                  }}>
+                  onMouseEnter={() => {this.onRefreshHover()}}
+                  onMouseLeave={() => {this.onRefreshLeave()}}
+                  onClick={() => {this.clickedRefresh()}}>
                   <rect id="Rectangle" x="0" y="0" width="32" height="32"/>
                   <path
                     d="M6,21.9381945 L7.76629301,21 C9.48996241,24.2450681 12.8633597,26.3163636 16.6041316,26.3163636 C20.2453954,26.3163636 23.5426319,24.3544813 25.307754,21.2443762 L27.0471433,22.2315564 C24.9302322,25.9615059 20.9725418,28.3163636 16.6041316,28.3163636 C12.1161838,28.3163636 8.06739005,25.8303687 6,21.9381945 Z"
@@ -207,7 +275,7 @@ class SignIn__Validation extends Component {
                                     attributeType="XML"
                                     type="rotate"
                                     from="0 16 16" to="360 16 16" dur="1s"
-                                    fill={"freeze"} begin={'click'}
+                                    fill={"freeze"} begin={'indefinite'}
                                     repeatCount="4"/>
                 </g>
                 <animateTransform id={"middleRefresh"}
@@ -215,7 +283,7 @@ class SignIn__Validation extends Component {
                                   attributeType="XML"
                                   type="translate"
                                   from="610, 59" to="318, 59" dur="0.3s"
-                                  fill={"freeze"} begin={'click'}
+                                  fill={"freeze"} begin={'rotate360.begin'}
                                   repeatCount="1"
                 />
                 <animateTransform attributeName="transform"
@@ -241,7 +309,12 @@ class SignIn__Validation extends Component {
 }
 
 SignIn__Validation.propTypes = {
-  input: PropTypes.string.isRequired
+  input: PropTypes.string.isRequired,
+  refreshClicked: PropTypes.func.isRequired
 };
 
-export default SignIn__Validation;
+const mapStateToProps = state => ({
+  clickRefreshCount: state.clickRefreshCount,
+});
+
+export default connect(mapStateToProps, { refreshClicked })(SignIn__Validation);

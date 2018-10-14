@@ -17,6 +17,24 @@
         width: 700px;
     }
 }
+.Validation-error {
+    animation-name: error;
+    animation-duration: 0.5s;
+}
+@keyframes error {
+    20% {
+        transform: translateX(30px);
+    }
+    40% {
+        transform: translateX(-20px);
+    }
+    60% {
+        transform: translateX(10px);
+    }
+    80% {
+        transform: translateX(-5px);
+    }
+}
 .Validation-div-enabled {
     width: 700px;
     margin: auto;

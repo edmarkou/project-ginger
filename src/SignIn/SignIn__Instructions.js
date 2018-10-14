@@ -12,9 +12,9 @@ class SignIn__Instructions extends Component {
             <text textAnchor='middle' x='200' y='74' className={"Instructions"} id={"instructions"}>
               Enter phone number to login or register
               <animate
-                attributeType="SVG" attributeName="y" id={"textMoveOnClick"}
+                attributeType="SVG" attributeName="y"
                 values={'74; 40; -20'} keyTimes={'0; 0.5; 1'}
-                dur="0.4s" repeatCount="1" begin="indefinite"
+                dur="0.4s" repeatCount="1" begin="textDisappearOnClick.begin"
                 fill="freeze"/>
               <animate
                 attributeType="CSS" attributeName="opacity" id={"textDisappearOnClick"}
@@ -22,20 +22,20 @@ class SignIn__Instructions extends Component {
                 dur="0.2s" repeatCount="1" begin="indefinite"
                 fill="freeze"/>
             </text>
-            <text textAnchor='middle' x='200' y='140' className={"NewInstructions"} id={"instructions"}>
+            <text textAnchor='middle' x='200' y='140' className={"NewInstructions"}>
               Введите код подтверждения,
               <animate
-                attributeType="SVG" attributeName="y" id={"newTextAppear1"}
+                attributeType="SVG" attributeName="y"
                 from={'140'} to={'74'}
-                dur="0.2s" repeatCount="1" begin="indefinite"
+                dur="0.2s" repeatCount="1" begin="textDisappearOnClick.begin"
                 fill="freeze"/>
             </text>
-            <text textAnchor='middle' x='200' y='160' className={"NewInstructions"} id={"instructions"}>
+            <text textAnchor='middle' x='200' y='160' className={"NewInstructions"}>
               который мы отправили на +371 {this.props.input}
               <animate
-                attributeType="SVG" attributeName="y" id={"newTextAppear2"}
+                attributeType="SVG" attributeName="y"
                 from={'160'} to={'94'}
-                dur="0.2s" repeatCount="1" begin="indefinite"
+                dur="0.2s" repeatCount="1" begin="textDisappearOnClick.begin"
                 fill="freeze"/>
             </text>
           </svg>

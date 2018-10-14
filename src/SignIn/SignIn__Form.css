@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,900');
-
-.SignInForm {
-    vertical-align: middle;
-}
-/*-------SignIn--------*/
-.SignInForm__form {
+/*-------Form--------*/
+.Form {
     width: 450px;
     height: 90px;
     border-bottom-left-radius: 4px;
@@ -17,45 +13,22 @@
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
-.SignInForm__form:hover {
+.Form:hover {
     border: solid 1px #b3b3b3;
     cursor: text;
 }
-.SignInForm__form-enter {
+.Form-enter {
     opacity: 0.01;
 }
-.SignInForm__form-enter-done {
+.Form-enter-done {
     opacity: 1;
     transition: all 300ms ease-out;
 }
-.SignInForm__form-exit {
+.Form-exit {
     opacity: 1;
 }
-/*-------SignInText & SignInInstructions--------*/
-.SignInForm__SignInText {
-    width: 470px;
-    height: 37px;
-    font-family: Montserrat, sans-serif;
-    font-size: 30px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 0.4px;
-    text-align: center;
-    color: #000000;
-    cursor: default;
-}
-.SignInForm__SignInText-enter {
-    opacity: 0.01;
-    transform: translateY(-10px);
-}
-.SignInForm__SignInText-enter-done {
-    opacity: 1;
-    transition: all 1s;
-}
-/*-------SignInSelector--------*/
-.SignInForm__selector {
+/*-------Selector--------*/
+.Form__selector {
     width: 70px;
     height: 22px;
     font-family: Montserrat, sans-serif;
@@ -73,11 +46,11 @@
     border: none;
     outline: none;
 }
-.SignInForm__selector:hover {
+.Form__selector:hover {
     cursor: pointer;
 }
-/*-------SignInInput--------*/
-.SignInForm__input {
+/*-------Input--------*/
+.Form__input {
     width: 124px;
     height: 22px;
     font-family: Montserrat, sans-serif;
@@ -92,8 +65,8 @@
     outline: none;
     margin-left: 10px;
 }
-/*-------SignInButton--------*/
-.SignInForm__button {
+/*-------Button--------*/
+.Form__button {
     width: 150px;
     height: 92px;
     padding: 0;
@@ -109,28 +82,28 @@
     display: inline-block;
     vertical-align: top;
 }
-.SignInForm__button:enabled {
+.Form__button:enabled {
     background: linear-gradient(to bottom, #000000 50%, #00f1ff 50%);
     background-size: 100% 200%;
     transition: all 0.2s;
     opacity: 1;
 }
-.SignInForm__button:enabled::before {
+.Form__button:enabled::before {
     opacity: 1;
 }
-.SignInForm__button:enabled:hover {
+.Form__button:enabled:hover {
     background: linear-gradient(to bottom, #000000 50%, #00f1ff 50%) 0 100%;
     background-size: 100% 200%;
     transition: all 0.2s;
     cursor: pointer;
 }
-.SignInForm__button:enabled:active {
+.Form__button:enabled:active {
     background: linear-gradient(to bottom, #00dce8 50%, #00dce8 50%);
 }
-.SignInForm__button-svg{
+.Form__button-svg{
     transition: all 0.2s;
 }
-.SignInForm__button-svg:active {
+.Form__button-svg:active {
     margin-left: 100px;
     transition: all 0.2s;
 }
