@@ -20,7 +20,7 @@ class SignIn extends Component {
       <div style={{verticalAlign: 'middle'}}>
         <SignIn__Title loaded={this.state.loaded}/>
         {!this.props.clickedNext ? <SignIn__Form loaded={this.state.loaded}/> : <SignIn__Validation input={this.props.input}/>}
-        <SignIn__Instructions input={this.props.input} loaded={this.state.loaded}/>
+        <SignIn__Instructions input={this.props.input} loaded={this.state.loaded} clickRefreshCount={this.props.clickRefreshCount}/>
       </div>
     );
   }
@@ -29,6 +29,7 @@ class SignIn extends Component {
 const mapStateToProps = state => ({
   clickedNext: state.clickedNext,
   input: state.input,
+  clickRefreshCount: state.clickRefreshCount
 });
 
 export default connect(mapStateToProps)(SignIn);

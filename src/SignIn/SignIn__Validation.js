@@ -17,17 +17,32 @@ class SignIn__Validation extends Component {
       code6: '',
       refreshButtonColor: '#CCCCCC',
       refreshClicked: false,
-      error: false
+      error: false,
+      notLoaded: true,
+      errorInstructionsIsUp: false,
+      refreshInstructionsIsUp: false
     }
   }
+
+  componentDidMount() {
+    document.getElementById("inputLoaded").beginElementAt(0);
+    setTimeout(() => {
+      this.setState({ notLoaded: false});
+      document.getElementById("code1").focus();
+    }, 800)
+  }
+
   onCodeInputType(event){
     this.setState({ [event.target.id]: event.target.value });
     let code = this.state.code1 + this.state.code2 + this.state.code3 + this.state.code4 + this.state.code5 + this.state.code6;
     if (code.length === 5 && event.target.value.length === 1) {
-      this.setState({error: true, refreshButtonColor: '#F55E33'});
       if(this.props.clickRefreshCount === 0) document.getElementById("smileyAnimationDisappear").beginElementAt(0);
       if(this.props.clickRefreshCount === 1) document.getElementById("firstRefreshDisappear").beginElementAt(0);
       document.getElementById("error").beginElementAt(0);
+      if (!this.state.errorInstructionsIsUp) document.getElementById("errorInstructionsUp").beginElementAt(0);
+      if (this.state.refreshInstructionsIsUp) document.getElementById("refreshInstructionsDisappear").beginElementAt(0);
+      this.setState({ errorInstructionsIsUp: true, refreshInstructionsIsUp: false, error: true, refreshButtonColor: '#F55E33'});
+      document.getElementById(event.target.id).blur();
     }
   }
   onRefreshHover() {
@@ -49,6 +64,7 @@ class SignIn__Validation extends Component {
     if(!this.state.refreshClicked) {
       document.getElementById("rotate360").beginElementAt(0);
       document.getElementById("buttonDisappear").beginElementAt(0);
+      document.getElementById("inputDisappear").beginElementAt(0);
       switch (this.props.clickRefreshCount){
         case 0:
           if (this.state.error) document.getElementById("errorAnimationDisappear").beginElementAt(0);
@@ -63,8 +79,13 @@ class SignIn__Validation extends Component {
           document.getElementById("error").beginElementAt(3.9);
           break;
         default:
+          document.getElementById("errorAnimationDisappear").beginElementAt(0);
+          document.getElementById("clockAnimationUp").beginElementAt(0);
+          document.getElementById("error").beginElementAt(3.9);
           break;
       }
+      if (this.state.errorInstructionsIsUp) document.getElementById("errorInstructionsDisappear").beginElementAt(0);
+      if (!this.state.refreshInstructionsIsUp) document.getElementById("refreshInstructionsUp").beginElementAt(0);
       this.props.refreshClicked(this.props.clickRefreshCount);
       setTimeout(() => {
         this.setState({ refreshClicked: false, refreshButtonColor: '#CCCCCC'});
@@ -72,6 +93,8 @@ class SignIn__Validation extends Component {
       }, 4000)
     }
     this.setState({
+      refreshInstructionsIsUp: true,
+      errorInstructionsIsUp: false,
       refreshClicked: true,
       error: false,
       code1: '',
@@ -85,13 +108,14 @@ class SignIn__Validation extends Component {
   render() {
     return (
       <div className="Validation-div-enabled">
-        <form className={this.state.error ? "Validation Validation-error" : "Validation"}>
+        <form className={this.state.error ? "Validation Validation-error" : (this.state.notLoaded ? "Validation Validation-loaded" : "Validation")}>
           <svg xmlns="http://www.w3.org/2000/svg" width={'700px'} height={'150px'}>
             <g>
               <foreignObject x='0px' y='0' height={'150px'} width={'230px'}>
                 <button className={"ChangeNumber"} disabled={this.state.refreshClicked}>
                   <a id={"selectorNumber"} className={"SelectorNumber"}>+371</a>
-                  <a className={"Number"}>{this.props.input}:</a>
+                  <a className={"Number"}>{this.props.input}:</a> <br/>
+                  <a className={"ChangeNumber__text"} style={{opacity: '0.5'}} >change number</a>
                 </button>
               </foreignObject>
               <animateTransform attributeName="transform" id={'buttonDisappear'}
@@ -105,13 +129,13 @@ class SignIn__Validation extends Component {
                                 attributeType="XML"
                                 type="translate"
                                 from="30, 0" to="0, 0" dur="0.2s"
-                                fill={"freeze"} begin={'buttonDisappear.begin + 3.7s'}
+                                fill={"freeze"} begin={'buttonDisappear.begin + 3.8s'}
                                 repeatCount="1"
               />
               <animate attributeName="opacity"
                        attributeType={"CSS"}
                        from={'0'} to={'1'}
-                       fill={"freeze"} begin={'buttonDisappear.begin + 3.7s'}
+                       fill={"freeze"} begin={'buttonDisappear.begin + 3.8s'}
                        repeatCount={"1"} dur={"0.2s"}
               />
               <animate attributeName="opacity"
@@ -122,14 +146,12 @@ class SignIn__Validation extends Component {
               />
             </g>
             <g>
-              <foreignObject className={this.state.refreshClicked ? 'animate-noOpacity' : 'animate-opacity'}
-                             id={'codeInput'} x='230px' y='0' height={'150px'} width={'356px'}>
+              <foreignObject x='700px' y='0' height={'150px'} width={'356px'}>
                 <InputMask
-                  className={this.state.refreshClicked ? "CodeInput" : "CodeInput animate-codeInput"}
+                  className={"CodeInput"}
                   id="code1"
-                  autoFocus={true}
-                  style={this.state.error ? {color: '#f55e33', border: 'solid 1px #f55e33'} : null}
-                  disabled={this.state.refreshClicked ? "disabled" : null}
+                  style={this.state.error ? {marginLeft: '60px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '60px'}}
+                  disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                   autoComplete="off"
                   value={this.state.code1}
                   onChange={(event) => {
@@ -143,7 +165,7 @@ class SignIn__Validation extends Component {
                 <InputMask className="CodeInput"
                            id="code2"
                            style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
-                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                            autoComplete="off"
                            value={this.state.code2}
                            onChange={(event) => {
@@ -159,7 +181,7 @@ class SignIn__Validation extends Component {
                 <InputMask className="CodeInput"
                            id="code3"
                            style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
-                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                            autoComplete="off"
                            value={this.state.code3}
                            onChange={(event) => {
@@ -175,7 +197,7 @@ class SignIn__Validation extends Component {
                 <InputMask className="CodeInput"
                            id="code4"
                            style={this.state.error ? {marginLeft: '20px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '20px'}}
-                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                            autoComplete="off"
                            value={this.state.code4}
                            onChange={(event) => {
@@ -191,7 +213,7 @@ class SignIn__Validation extends Component {
                 <InputMask className="CodeInput"
                            id="code5"
                            style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
-                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                            autoComplete="off"
                            placeholder={8}
                            value={this.state.code5}
@@ -208,7 +230,7 @@ class SignIn__Validation extends Component {
                 <InputMask className="CodeInput"
                            id="code6"
                            style={this.state.error ? {marginLeft: '6px', color: '#f55e33', border: 'solid 1px #f55e33'} : {marginLeft: '6px'}}
-                           disabled={this.state.refreshClicked ? "disabled" : null}
+                           disabled={this.state.refreshClicked || this.state.notLoaded ? "disabled" : null}
                            autoComplete="off"
                            placeholder={8}
                            value={this.state.code6}
@@ -221,6 +243,45 @@ class SignIn__Validation extends Component {
                            guide={false}
                 />
               </foreignObject>
+              <animateTransform attributeName="transform"
+                                attributeType="XML"
+                                type="translate"
+                                from="-470, 0" to="-490, 0" dur="0.2s"
+                                fill={"freeze"} begin={'inputDisappear.begin'}
+                                repeatCount="1"
+              />
+              <animateTransform attributeName="transform"
+                                attributeType="XML"
+                                type="translate"
+                                from="-440, 0" to="-470, 0" dur="0.2s"
+                                fill={"freeze"} begin={'inputDisappear.begin + 3.8s'}
+                                repeatCount="1"
+              />
+              <animate attributeName="opacity"
+                       attributeType={"CSS"}
+                       from={'0'} to={'1'}
+                       fill={"freeze"} begin={'inputDisappear.begin + 3.8s'}
+                       repeatCount={"1"} dur={"0.2s"}
+              />
+              <animate attributeName="opacity" id={'inputDisappear'}
+                       attributeType={"CSS"}
+                       from={'1'} to={'0'}
+                       fill={"freeze"} begin={'indefinite'}
+                       repeatCount={"1"} dur={"0.2s"}
+              />
+              <animate attributeName="opacity" id={'inputLoaded'}
+                       attributeType={"CSS"}
+                       values={'0; 0; 1'} keyTimes={'0; 0.75; 1'}
+                       fill={"freeze"} begin={'indefinite'}
+                       repeatCount={"1"} dur={"0.8s"}
+              />
+              <animateTransform attributeName="transform"
+                                attributeType="XML"
+                                type="translate"
+                                values={'-410, 0; -410, 0; -470, 0'} keyTimes={'0; 0.75; 1'} dur="0.8s"
+                                fill={"freeze"} begin={'inputLoaded.begin'}
+                                repeatCount="1"
+              />
             </g>
             <defs>
               <linearGradient x1="5.29423494%" y1="21.9601149%" x2="82.112707%" y2="21.9601149%" id="linearGradient-1">
@@ -235,7 +296,7 @@ class SignIn__Validation extends Component {
             </defs>
             <g stroke="none" strokeWidth="1" fill="#ffffff" fillRule="evenodd">
               <g transform="translate(610, 59)" fillRule="nonzero">
-                <g
+                <g style={{cursor: 'pointer'}}
                   onMouseEnter={() => {this.onRefreshHover()}}
                   onMouseLeave={() => {this.onRefreshLeave()}}
                   onClick={() => {this.clickedRefresh()}}>
