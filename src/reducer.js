@@ -1,4 +1,4 @@
-import {CLICKED_NEXT, INPUT_NUMBER, REFRESH_CLICKED} from './actionTypes';
+import {CLICKED_BACK, CLICKED_NEXT, INPUT_NUMBER, REFRESH_CLICKED} from './actionTypes';
 
 const initialState = {
   clickRefreshCount: 0,
@@ -21,6 +21,12 @@ export default function(state = initialState, action) {
     case CLICKED_NEXT:
       return {
         ...state,
+        clickedNext: action.payload
+      };
+    case CLICKED_BACK:
+      return {
+        clickRefreshCount: 0,
+        input: '',
         clickedNext: action.payload
       };
     default:

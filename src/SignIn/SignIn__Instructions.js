@@ -21,9 +21,29 @@ class SignIn__Instructions extends Component {
                 from={'0.5'} to={'0'}
                 dur="0.2s" repeatCount="1" begin="indefinite"
                 fill="freeze"/>
+              <animate
+                attributeType="SVG" attributeName="y" id={"textAppear"}
+                from={'180'} to={'74'}
+                dur="0.3s" repeatCount="1" begin="indefinite"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity"
+                values={"0; 0; 1"} keyTimes={"0; 0.333; 1"}
+                dur="0.3s" repeatCount="1" begin="textAppear.begin"
+                fill="freeze"/>
             </text>
             <text textAnchor='middle' x='200' y='180' className={"NewInstructions"}>
               <tspan style={this.props.clickRefreshCount !== 0 ? {fill: '#8e8e8e'} : null }>Введите код подтверждения,</tspan>
+              <animate
+                attributeType="SVG" attributeName="y"
+                values={'74; 40; -20'} keyTimes={'0; 0.5; 1'}
+                dur="0.4s" repeatCount="1" begin="newInstructionsDisappear.begin"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity" id={"newInstructionsDisappear"}
+                from={'1'} to={'0'}
+                dur="0.2s" repeatCount="1" begin="indefinite"
+                fill="freeze"/>
               <animate
                 attributeType="SVG" attributeName="y"
                 from={'180'} to={'74'}
@@ -37,6 +57,16 @@ class SignIn__Instructions extends Component {
             </text>
             <text textAnchor='middle' x='200' y='200' className={"NewInstructions"}>
               <tspan style={this.props.clickRefreshCount !== 0 ? {fill: '#8e8e8e'} : null }>который мы отправили на</tspan> +371 {this.props.input}
+              <animate
+                attributeType="SVG" attributeName="y"
+                values={'94; 60; -20'} keyTimes={'0; 0.5; 1'}
+                dur="0.4s" repeatCount="1" begin="newInstructionsDisappear.begin"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity"
+                from={'1'} to={'0'}
+                dur="0.2s" repeatCount="1" begin="newInstructionsDisappear.begin"
+                fill="freeze"/>
               <animate
                 attributeType="SVG" attributeName="y"
                 from={'210'} to={'94'}

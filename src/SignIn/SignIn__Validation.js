@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InputMask from 'react-text-mask';
 import { connect } from 'react-redux';
 import './SignIn__Validation.css';
-import { refreshClicked } from "../actions";
+import {clickedBack, refreshClicked} from "../actions";
 
 class SignIn__Validation extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class SignIn__Validation extends Component {
     if (code.length === 5 && event.target.value.length === 1) {
       if(this.props.clickRefreshCount === 0) document.getElementById("smileyAnimationDisappear").beginElementAt(0);
       if(this.props.clickRefreshCount === 1) document.getElementById("firstRefreshDisappear").beginElementAt(0);
+      if(this.props.clickRefreshCount === 2) document.getElementById("secondRefreshDisappear").beginElementAt(0);
       document.getElementById("error").beginElementAt(0);
       if (!this.state.errorInstructionsIsUp) document.getElementById("errorInstructionsUp").beginElementAt(0);
       if (this.state.refreshInstructionsIsUp) document.getElementById("refreshInstructionsDisappear").beginElementAt(0);
@@ -76,12 +77,24 @@ class SignIn__Validation extends Component {
           if (this.state.error) document.getElementById("errorAnimationDisappear").beginElementAt(0);
           else document.getElementById("firstRefreshDisappear").beginElementAt(0);
           document.getElementById("clockAnimationUp").beginElementAt(0);
+          document.getElementById("secondRefresh").beginElementAt(3.9);
+          document.getElementById("changeNumberTextAppear").beginElementAt(5);
+          document.getElementById("changeNumberTextDisappear").beginElementAt(7);
+          break;
+        case 2:
+          if (this.state.error) document.getElementById("errorAnimationDisappear").beginElementAt(0);
+          else document.getElementById("secondRefreshDisappear").beginElementAt(0);
+          document.getElementById("clockAnimationUp").beginElementAt(0);
           document.getElementById("error").beginElementAt(3.9);
+          document.getElementById("changeNumberTextAppear").beginElementAt(5);
+          document.getElementById("changeNumberTextDisappear").beginElementAt(7);
           break;
         default:
           document.getElementById("errorAnimationDisappear").beginElementAt(0);
           document.getElementById("clockAnimationUp").beginElementAt(0);
           document.getElementById("error").beginElementAt(3.9);
+          document.getElementById("changeNumberTextAppear").beginElementAt(5);
+          document.getElementById("changeNumberTextDisappear").beginElementAt(7);
           break;
       }
       if (this.state.errorInstructionsIsUp) document.getElementById("errorInstructionsDisappear").beginElementAt(0);
@@ -105,6 +118,35 @@ class SignIn__Validation extends Component {
       code6: '',
     });
   }
+  changeNumber() {
+    document.getElementById("signInTextAppear").beginElementAt(0);
+    document.getElementById("textAppear").beginElementAt(0);
+    document.getElementById("newInstructionsDisappear").beginElementAt(0);
+    if (this.state.error) {
+      document.getElementById("errorAnimationDisappear").beginElementAt(0);
+      document.getElementById("errorInstructionsDisappear").beginElementAt(0);
+    }
+    else {
+      switch (this.props.clickRefreshCount) {
+        case 0:
+          document.getElementById("smileyAnimationDisappear").beginElementAt(0);
+          break;
+        case 1:
+          document.getElementById("firstRefreshDisappear").beginElementAt(0);
+          document.getElementById("refreshInstructionsDisappear").beginElementAt(0);
+          break;
+        case 2:
+          document.getElementById("secondRefreshDisappear").beginElementAt(0);
+          document.getElementById("refreshInstructionsDisappear").beginElementAt(0);
+          break;
+        default:
+          document.getElementById("errorAnimationDisappear").beginElementAt(0);
+          document.getElementById("refreshInstructionsDisappear").beginElementAt(0);
+          break;
+      }
+    }
+    this.props.clickedBack();
+  }
   render() {
     return (
       <div className="Validation-div-enabled">
@@ -112,10 +154,34 @@ class SignIn__Validation extends Component {
           <svg xmlns="http://www.w3.org/2000/svg" width={'700px'} height={'150px'}>
             <g>
               <foreignObject x='0px' y='0' height={'150px'} width={'230px'}>
-                <button className={"ChangeNumber"} disabled={this.state.refreshClicked}>
+                <button className={"ChangeNumber"} disabled={this.state.refreshClicked}
+                        onMouseEnter={() => { document.getElementById("changeNumberTextAppear").beginElementAt(0) }}
+                        onMouseLeave={() => { document.getElementById("changeNumberTextDisappear").beginElementAt(0) }}
+                        onClick={ () => { this.changeNumber()}}
+                >
                   <a id={"selectorNumber"} className={"SelectorNumber"}>+371</a>
-                  <a className={"Number"}>{this.props.input}:</a> <br/>
-                  <a className={"ChangeNumber__text"} style={{opacity: '0.5'}} >change number</a>
+                  <a className={"Number"}>{this.props.input}:</a>
+                  <br/>
+                  <br/>
+                  <svg xmlns="http://www.w3.org/2000/svg" width={"102px"} height={"15px"}>
+                    <g style={{opacity: '0'}}>
+                      <foreignObject width={"102px"} height={"15px"}>
+                        <a className={"ChangeNumber__text"}>change number</a>
+                      </foreignObject>
+                      <animate attributeName="opacity" id={"changeNumberTextAppear"}
+                               attributeType={"CSS"}
+                               from={'0'} to={'1'}
+                               fill={"freeze"} begin={'indefinite'}
+                               repeatCount={"1"} dur={"0.2s"}
+                      />
+                      <animate attributeName="opacity" id={"changeNumberTextDisappear"}
+                               attributeType={"CSS"}
+                               from={'1'} to={'0'}
+                               fill={"freeze"} begin={'indefinite'}
+                               repeatCount={"1"} dur={"0.2s"}
+                      />
+                    </g>
+                  </svg>
                 </button>
               </foreignObject>
               <animateTransform attributeName="transform" id={'buttonDisappear'}
@@ -371,11 +437,12 @@ class SignIn__Validation extends Component {
 
 SignIn__Validation.propTypes = {
   input: PropTypes.string.isRequired,
-  refreshClicked: PropTypes.func.isRequired
+  refreshClicked: PropTypes.func.isRequired,
+  clickedBack: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   clickRefreshCount: state.clickRefreshCount,
 });
 
-export default connect(mapStateToProps, { refreshClicked })(SignIn__Validation);
+export default connect(mapStateToProps, { refreshClicked, clickedBack })(SignIn__Validation);

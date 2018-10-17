@@ -1,3 +1,4 @@
 export const REFRESH_CLICKED = 'REFRESH_CLICKED';
 export const INPUT_NUMBER = 'INPUT_NUMBER';
 export const CLICKED_NEXT = 'CLICKED_NEXT';
+export const CLICKED_BACK = 'CLICKED_BACK';

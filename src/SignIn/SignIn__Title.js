@@ -4,6 +4,7 @@ import smiley from './SignInAssets/smiley.png';
 import clock from './SignInAssets/clock.png';
 import error from './SignInAssets/error.png';
 import invalid from './SignInAssets/invalid.png';
+import firstRefresh from './SignInAssets/firstRefresh.png';
 import PropTypes from 'prop-types';
 import './SignIn__Title.css';
 
@@ -23,6 +24,16 @@ class SignIn__Title extends Component {
               <animate
                 attributeType="CSS" attributeName="opacity" id={"signInTextDisappear"}
                 from={'1'} to={'0'}
+                dur="0.2s" repeatCount="1" begin="indefinite"
+                fill="freeze"/>
+              <animate
+                attributeType="SVG" attributeName="y"
+                from={'120'} to={'70'}
+                dur="0.3s" repeatCount="1" begin="signInTextAppear.begin"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity" id={"signInTextAppear"}
+                from={'0'} to={'1'}
                 dur="0.2s" repeatCount="1" begin="indefinite"
                 fill="freeze"/>
             </text>
@@ -70,7 +81,7 @@ class SignIn__Title extends Component {
                 dur="0.2s" repeatCount="1" begin="clockAnimationUp.begin"
                 fill="freeze"/>
             </image>
-            <image width={'40px'} height={'40px'} xlinkHref={invalid} x={'160'} y={'120'}>
+            <image width={'40px'} height={'40px'} xlinkHref={firstRefresh} x={'160'} y={'120'}>
               <animate
                 attributeType="SVG" attributeName="y" id={"firstRefresh"}
                 from={'120'} to={'40'}
@@ -90,6 +101,28 @@ class SignIn__Title extends Component {
                 attributeType="CSS" attributeName="opacity"
                 from={'0'} to={'1'}
                 dur="0.2s" repeatCount="1" begin="firstRefresh.begin"
+                fill="freeze"/>
+            </image>
+            <image width={'40px'} height={'40px'} xlinkHref={invalid} x={'160'} y={'120'}>
+              <animate
+                attributeType="SVG" attributeName="y" id={"secondRefresh"}
+                from={'120'} to={'40'}
+                dur="0.2s" repeatCount="1" begin="indefinite"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity"
+                from={'0'} to={'1'}
+                dur="0.2s" repeatCount="1" begin="secondRefresh.begin"
+                fill="freeze"/>
+              <animate
+                attributeType="SVG" attributeName="y" id={"secondRefreshDisappear"}
+                from={'40'} to={'-60'}
+                dur="0.2s" repeatCount="1" begin="indefinite"
+                fill="freeze"/>
+              <animate
+                attributeType="CSS" attributeName="opacity"
+                from={'1'} to={'0'}
+                dur="0.2s" repeatCount="1" begin="secondRefreshDisappear.begin"
                 fill="freeze"/>
             </image>
             <image width={'40px'} height={'40px'} xlinkHref={error} x={'160'} y={'120'}>
