@@ -3,7 +3,7 @@
 .App__policy-div {
   text-align: center;
   margin-bottom: 95px;
-  margin-top: 11%;
+  margin-top: 5.6%;
 }
 .App__lock {
   width: 11px;
@@ -23,8 +23,6 @@
   line-height: normal;
   letter-spacing: 0.9px;
   text-align: center;
-  margin-bottom: 95px;
-  margin-top: 11%;
   color: #8e8e8e;
   stroke: #8e8e8e;
   cursor: pointer;

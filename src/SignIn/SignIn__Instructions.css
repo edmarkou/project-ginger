@@ -1,0 +1,56 @@
+.Instructions {
+    width: 470px;
+    height: 28px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #8e8e8e;
+    opacity: 0.5;
+    fill: #8e8e8e;
+    cursor: default;
+}
+.Instructions-enter {
+    opacity: 0.01;
+    transform: translateY(10px);
+}
+.Instructions-enter-done {
+    opacity: 1;
+    transition: all 1s;
+}
+.div-instructions {
+    text-align: center;
+
+}
+.NewInstructions {
+    width: 470px;
+    height: 28px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.3px;
+    text-align: center;
+    fill: #000000;
+    cursor: default;
+}
+.errorInstructions {
+    width: 470px;
+    height: 28px;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.3px;
+    text-align: center;
+    fill: #f55e33;
+    cursor: default;
+}
