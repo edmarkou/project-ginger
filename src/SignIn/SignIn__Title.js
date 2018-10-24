@@ -12,7 +12,7 @@ class SignIn__Title extends Component {
   render() {
     return (
       <CSSTransition classNames={"SignInForm__SignInText"} timeout={300} in={this.props.loaded} unmountOnExit>
-        <div style={{textAlign: 'center', marginTop: '7.9%', marginBottom: '30px', display: 'block'}}>
+        <div style={{textAlign: 'center', marginTop: '9.9%', marginBottom: '30px', display: 'block'}}>
           <svg xmlns="http://www.w3.org/2000/svg" width='400px' height='90px'>
             <text textAnchor={'middle'} x={'200'} y={'70'} className={"SignInForm__SignInText"}>
               Sign In / Sign Up
